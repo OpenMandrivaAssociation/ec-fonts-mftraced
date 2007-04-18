@@ -1,20 +1,18 @@
-%define version 1.0.9
-%define release 1mdk
-
-Summary:	TeX EC fonts, PostScript Type1 format
-Summary:	Type1 PostScript fonts for TeX with european accents
-Name:		ec-fonts-mftraced
-Version:	%{version}
-Release:	%{release}
-License:	Public Domain
-Group:		Publishing
-URL:		http://www.xs4all.nl/~hanwen/ec-mftrace/
-Source0:	http://lilypond.org/download/fonts/%{name}-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	mftrace >= 1.0.36-2mdk
-BuildRequires:	tetex potrace
-Prereq:		tetex
-BuildArch:	noarch
+Name:           ec-fonts-mftraced
+Version:        1.0.12
+Release:        %mkrel 1
+Epoch:          0
+Summary:        Type1 PostScript fonts for TeX with european accents
+License:        Public Domain
+Group:          Publishing
+URL:            http://lilypond.org/download/
+Source0:        http://lilypond.org/download/old/ec-fonts-mftraced/ec-fonts-mftraced-%{version}.tar.gz
+Requires(post): tetex
+BuildRequires:  mftrace
+BuildRequires:  potrace
+BuildRequires:  tetex
+BuildArch:      noarch
+BuildRoot:      %{_tmppath}/%{name}-%{epoch}:%{version}-%{release}-root
 
 %description
 These are Type1 renderings of the EC variants of the standard CMR
@@ -22,27 +20,28 @@ family.
 
 %prep
 %setup -q
+%{__perl} -pi -e 's|--potrace |--potrace="%{_bindir}/potrace" |' ./GNUmakefile
 
 %build
-make ./tfm.make
-make
+%{configure2_5x}
+%{__make}
 
 %install
-rm -rf %{buildroot}
-make install prefix=%{buildroot}%{_prefix}
+%{__rm} -rf %{buildroot}
+%{makeinstall_std}
 
 # handle doc files in %%doc instead
-rm -rf %{buildroot}%{_docdir}
+%{__rm} -r %{buildroot}%{_docdir}
+
+%clean
+%{__rm} -rf %{buildroot}
 
 %post
 [ -x %{_bindir}/texhash ] && %{_bindir}/texhash 2>/dev/null
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root,-)
-%doc ChangeLog README LICENSE
+%defattr(0644,root,root,0755)
+%doc COPYING ChangeLog INSTALL LICENSE README VERSION
+%{_datadir}/texmf/fonts/map/dvips/%{name}
 %{_datadir}/texmf/fonts/type1/public/%{name}
 %{_datadir}/texmf/fonts/tfm/public/%{name}
-%{_datadir}/texmf/dvips/%{name}
