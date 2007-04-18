@@ -11,6 +11,7 @@ Requires(post): tetex
 BuildRequires:  mftrace
 BuildRequires:  potrace
 BuildRequires:  tetex
+BuildRequires:  tetex-dvips
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/%{name}-%{epoch}:%{version}-%{release}-root
 
