@@ -13,7 +13,6 @@ BuildRequires:  potrace
 BuildRequires:  tetex
 BuildRequires:  tetex-dvips
 BuildArch:      noarch
-BuildRoot:      %{_tmppath}/%{name}-%{epoch}:%{version}-%{release}-root
 
 %description
 These are Type1 renderings of the EC variants of the standard CMR
