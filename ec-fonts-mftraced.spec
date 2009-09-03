@@ -1,6 +1,6 @@
 Name:           ec-fonts-mftraced
 Version:        1.0.12
-Release:        %mkrel 3
+Release:        %mkrel 4
 Epoch:          0
 Summary:        Type1 PostScript fonts for TeX with european accents
 License:        Public Domain
