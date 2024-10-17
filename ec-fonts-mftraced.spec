@@ -5,7 +5,7 @@ Epoch:          0
 Summary:        Type1 PostScript fonts for TeX with european accents
 License:        Public Domain
 Group:          Publishing
-URL:            http://lilypond.org/download/
+URL:            https://lilypond.org/download/
 Source0:        http://lilypond.org/download/old/ec-fonts-mftraced/ec-fonts-mftraced-%{version}.tar.gz
 Requires(post): tetex
 BuildRequires:  mftrace
